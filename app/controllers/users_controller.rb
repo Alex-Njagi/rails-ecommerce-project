@@ -1,5 +1,10 @@
 class UsersController < ApplicationController
 skip_before_action :verify_authenticity_token
+
+    def new
+        @user = User.new
+    end
+
     # GET /users
     def index
         @users = User.all
@@ -16,11 +21,34 @@ skip_before_action :verify_authenticity_token
     def create
         @user = User.new(user_params)
         if @user.save
-            render json: @user, status: :created
+            # render json: @user, status: :created
+            redirect_to login_path, notice: "Account created successfully!"
         else
             render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
         end
     end
+
+    def login
+        # renders login page
+    end
+
+    def authenticate
+        user = User.find_by(email: params[:email])
+        if user && user.password == params[:password] # use bcrypt later
+            session[:user_id] = user.id
+            redirect_to root_path, notice: "Logged in!"
+        else
+            flash[:alert] = "Invalid credentials"
+            render :login
+        end
+    end
+
+    def logout
+        session[:user_id] = nil
+        redirect_to login_path, notice: "Logged out successfully!"
+    end
+
+
 
     # PATCH/PUT /users/:id
     def update
