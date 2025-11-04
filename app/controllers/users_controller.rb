@@ -22,9 +22,23 @@ skip_before_action :verify_authenticity_token
         @user = User.new(user_params)
         if @user.save
             # render json: @user, status: :created
-            redirect_to root_path, notice: "Account created successfully!"
+            redirect_to login_path, notice: "Account created successfully!"
         else
             render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
+        end
+    end
+
+    def login
+        # renders login page
+    end
+
+    def authenticate
+        user = User.find_by(email: params[:email])
+        if user && user.password == params[:password] # replace with secure check later
+            redirect_to root_path, notice: "Logged in!"
+        else
+            flash[:alert] = "Invalid credentials"
+            render :login
         end
     end
 
