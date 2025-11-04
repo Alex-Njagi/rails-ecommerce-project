@@ -24,6 +24,12 @@
   </head>
 
   <body>
+    <% if notice %>
+      <p style="color: green;"><%= notice %></p>
+    <% elsif alert %>
+      <p style="color: red;"><%= alert %></p>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>

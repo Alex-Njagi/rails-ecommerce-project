@@ -1,0 +1,52 @@
+<h1>Sign Up</h1>
+
+<%= form_with model: @user, url: signup_path, method: :post, local: true do |form| %>
+  <p>
+    <%= form.label :firstName, "First Name", required: true, title: "Please enter your first name" %><br>
+    <%= form.text_field :firstName %>
+  </p>
+
+  <p>
+    <%= form.label :lastName, "Last Name", required: true, title: "Please enter your last name" %><br>
+    <%= form.text_field :lastName %>
+  </p>
+
+  <p>
+    <%= form.label :email, "Email", required: true, title: "Please enter a valid email address" %><br>
+    <%= form.email_field :email %>
+  </p>
+
+  <p>
+    <%= form.label :password, "Password", required: true, title: "Please enter a valid password" %><br>
+    <%= form.password_field :password %>
+  </p>
+
+  <p>
+    <%= form.label :phoneNumber, "Phone Number", required: true, title: "Please enter a phone number" %><br>
+    <%= form.telephone_field :phoneNumber %>
+  </p>
+
+  <fieldset>
+    <legend>Address</legend>
+    <p>
+      <%= label_tag "user[address][county]", "County", required: true %><br>
+      <%= text_field_tag "user[address][county]" %>
+    </p>
+    <p>
+      <%= label_tag "user[address][city]", "City", required: true %><br>
+      <%= text_field_tag "user[address][city]" %>
+    </p>
+    <p>
+      <%= label_tag "user[address][street]", "Street", required: true %><br>
+      <%= text_field_tag "user[address][street]" %>
+    </p>
+    <p>
+      <%= label_tag "user[address][postalCode]", "Postal Code", required: true %><br>
+      <%= text_field_tag "user[address][postalCode]" %>
+    </p>
+  </fieldset>
+
+  <p>
+    <%= form.submit "Sign Up" %>
+  </p>
+<% end %>
