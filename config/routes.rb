@@ -30,5 +30,7 @@
   get "/cart", to: "carts#show"
   post "/cart/add_item", to: "carts#add_item"
   delete "/cart/clear", to: "carts#clear"
+  delete "/cart/remove/:product_id", to: "carts#remove_item", as: "remove_cart_item"
+
 
 end

@@ -57,4 +57,24 @@ class CartsController < ApplicationController
       render json: { message: "Cart not found" }, status: :not_found
     end
   end
+
+#   before_action :require_login
+
+  def show
+    @cart = Cart.find_by(user_id: session[:user_id])
+    @cart ||= Cart.create(user_id: session[:user_id], cartItems: [], cartTotal: 0)
+  end
+
+  def remove_item
+    @cart = Cart.find_by(user_id: session[:user_id])
+    product_id = params[:product_id]
+
+    if @cart
+      @cart.cartItems.reject! { |item| item["productID"] == product_id }
+      @cart.cartTotal = @cart.cartItems.sum { |item| item["productTotal"] }
+      @cart.save
+    end
+
+    redirect_to cart_path
+  end
 end
