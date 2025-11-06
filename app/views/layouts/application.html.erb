@@ -24,15 +24,8 @@
   </head>
 
   <body>
-    <% if notice %>
-      <p style="color: green;"><%= notice %></p>
-    <% elsif alert %>
-      <p style="color: red;"><%= alert %></p>
-    <% end %>
-    <%= yield %>
-  </body> 
 
-  <nav style="background:#eee; padding:10px;">
+    <nav style="background:#eee; padding:10px;">
   <% if session[:user_id] %>
     <span>Welcome, <%= User.find(session[:user_id]).firstName %>!</span>
     <%= button_to "Logout", logout_path, method: :delete, style: "margin-left:10px;" %>
@@ -41,6 +34,13 @@
     <%= link_to "Sign Up", signup_path %>
   <% end %>
   </nav>
+    <% if notice %>
+      <p style="color: green;"><%= notice %></p>
+    <% elsif alert %>
+      <p style="color: red;"><%= alert %></p>
+    <% end %>
+    <%= yield %>
+  </body> 
 
   <hr>
 
