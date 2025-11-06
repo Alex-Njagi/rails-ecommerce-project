@@ -1,3 +1,4 @@
+# app/controllers/carts_controller.rb
 class CartsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
@@ -56,6 +57,4 @@ class CartsController < ApplicationController
       render json: { message: "Cart not found" }, status: :not_found
     end
   end
-end
-
 end

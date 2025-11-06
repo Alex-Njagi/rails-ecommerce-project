@@ -8,11 +8,12 @@
       <h4>Category: <%= product.productCategory %></h4>
       <p>KSh <%= product.productPrice %></p>
       <button class="view-item-btn"
-              data-name="<%= product.productName %>"
-              data-category="<%= product.productCategory %>"
-              data-description="<%= product.productDescription %>"
-              data-price="<%= product.productPrice %>"
-              data-image="<%= product.productImage %>">
+        data-id="<%= product.id.to_s %>"
+        data-name="<%= product.productName %>"
+        data-category="<%= product.productCategory %>"
+        data-description="<%= product.productDescription %>"
+        data-price="<%= product.productPrice %>"
+        data-image="<%= product.productImage %>">
         View Item
       </button>
     </div>
@@ -27,6 +28,7 @@
       <div class="modal-image">
         <img id="modalProductImage" src="" alt="Product image" />
       </div>
+
       <div class="modal-details">
         <h2 id="modalProductName"></h2>
         <p><strong>Category:</strong> <span id="modalProductCategory"></span></p>
@@ -35,6 +37,9 @@
         <div class="quantity-box">
           <label for="quantityInput">Quantity:</label>
           <input type="number" id="quantityInput" value="1" min="1" />
+        </div>
+        <div class="cart-actions">
+          <button id="addToCartBtn" class="add-to-cart-btn">Add to Cart</button>
         </div>
       </div>
     </div>
@@ -111,6 +116,22 @@
     font-size: 1.5em;
     cursor: pointer;
   }
+
+  .add-to-cart-btn {
+  margin-top: 15px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  }
+
+  .add-to-cart-btn:hover {
+    background-color: #218838;
+  }
+
 </style>
 
 <script>
@@ -134,4 +155,52 @@
       document.getElementById("productModal").style.display = "none";
     }
   });
+
+  // Store the currently selected product ID (we’ll add this to your View Item button later)
+let currentProductId = null;
+
+// Update modal logic to capture product ID too
+document.querySelectorAll(".view-item-btn").forEach(button => {
+  button.addEventListener("click", () => {
+    document.getElementById("productModal").style.display = "block";
+    document.getElementById("modalProductName").textContent = button.dataset.name;
+    document.getElementById("modalProductCategory").textContent = button.dataset.category;
+    document.getElementById("modalProductDescription").textContent = button.dataset.description;
+    document.getElementById("modalProductPrice").textContent = button.dataset.price;
+    document.getElementById("modalProductImage").src = button.dataset.image;
+
+    currentProductId = button.dataset.id; // store product ID
+  });
+});
+
+// Add to Cart logic
+document.getElementById("addToCartBtn").addEventListener("click", async () => {
+  const quantity = parseInt(document.getElementById("quantityInput").value);
+
+  if (!currentProductId) {
+    alert("Error: No product selected.");
+    return;
+  }
+
+  const response = await fetch("/cart/add_item", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      product_id: currentProductId,
+      quantity: quantity
+    }),
+  });
+
+  const data = await response.json();
+
+  if (response.ok) {
+    alert("Item added to cart!");
+    document.getElementById("productModal").style.display = "none";
+  } else {
+    alert(`Error: ${data.error || "Could not add item."}`);
+  }
+});
+
 </script>

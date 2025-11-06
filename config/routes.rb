@@ -1,4 +1,4 @@
-Rails.application.routes.draw do
+  Rails.application.routes.draw do
   # get "pages/home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -26,5 +26,9 @@ Rails.application.routes.draw do
   delete "/logout", to: "users#logout"
 
   get "/view_products", to: "products#products"
+
+  get "/cart", to: "carts#show"
+  post "/cart/add_item", to: "carts#add_item"
+  delete "/cart/clear", to: "carts#clear"
 
 end
