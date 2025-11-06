@@ -36,7 +36,8 @@ skip_before_action :verify_authenticity_token
         user = User.find_by(email: params[:email])
         if user && user.password == params[:password] # use bcrypt later
             session[:user_id] = user.id
-            redirect_to root_path, notice: "Logged in!"
+            # redirect_to root_path, notice: "Logged in!"
+            redirect_to view_products_path, notice: "Logged in!"
         else
             flash[:alert] = "Invalid credentials"
             render :login

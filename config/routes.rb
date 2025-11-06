@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   resources :users, only: [:index, :show, :create, :update, :destroy]
-  resources :products, only: [:index, :show]
+  # resources :products, only: [:index, :show]
 
   root "pages#home" # landing page
 
@@ -25,5 +25,6 @@ Rails.application.routes.draw do
   post "/login", to: "users#authenticate"
   delete "/logout", to: "users#logout"
 
+  get "/view_products", to: "products#products"
 
 end
