@@ -32,5 +32,10 @@
   delete "/cart/clear", to: "carts#clear"
   delete "/cart/remove/:product_id", to: "carts#remove_item", as: "remove_cart_item"
 
+  get "/checkout", to: "checkouts#new"
+  post "/checkout", to: "checkouts#create"
+  get "/checkout/confirmation/:id", to: "checkouts#show", as: "checkout_confirmation"
+
+
 
 end
