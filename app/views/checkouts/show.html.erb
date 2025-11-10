@@ -1,0 +1,50 @@
+<h1>Order Confirmation</h1>
+
+<div class="checkout-container">
+  <div class="checkout-card">
+    <p>Thank you for your order, <%= User.find(@checkout.user_id).firstName %>!</p>
+    <p><strong>Delivery Date:</strong> <%= @checkout.deliveryDate.strftime("%B %d, %Y") %></p>
+    <p><strong>Payment Method:</strong> <%= @checkout.paymentMethod.humanize %></p>
+    <p><strong>Total Paid:</strong> KSh <%= @checkout.totalFees %></p>
+
+    <h3>Delivery Information</h3>
+    # <p><%= @checkout.deliveryInformation["county"] %>, 
+    #    <%= @checkout.deliveryInformation["city"] %>, 
+    #    <%= @checkout.deliveryInformation["street"] %> — 
+    #    <%= @checkout.deliveryInformation["postalCode"] %></p>
+
+    <div class="form-actions">
+      <%= link_to "Back to Products", products_path, class: "btn-submit" %>
+    </div>
+  </div>
+</div>
+
+<style>
+  .checkout-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+  }
+
+  .checkout-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    padding: 30px;
+    width: 60%;
+    text-align: center;
+  }
+
+  .btn-submit {
+    background-color: #5a00cc;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .btn-submit:hover {
+    background-color: #4700a3;
+  }
+</style>

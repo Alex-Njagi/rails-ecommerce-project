@@ -1,0 +1,199 @@
+<h1>Checkout</h1>
+
+<div class="checkout-container">
+  <div class="checkout-card">
+    <%= form_with model: @checkout, url: checkout_path, local: false, html: { id: "checkout-form" } do |f| %>
+
+      <div class="checkout-section">
+        <h3>Payment Information</h3>
+
+        <div class="form-group">
+          <%= f.label :paymentMethod, "Payment Method" %>
+          <%= f.select :paymentMethod, [["Mobile Money", "mobile_money"], ["Pay on Delivery", "on_delivery"]],
+                        {}, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :paymentNumber, "Payment Number" %>
+          <%= f.text_field :paymentNumber, class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="checkout-section">
+        <h3>Delivery Information</h3>
+
+        <div class="form-group">
+          <%= f.label :deliveryInformation_county, "County" %>
+          <%= f.text_field :deliveryInformation_county,
+              value: @checkout.deliveryInformation["county"], class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :deliveryInformation_city, "City" %>
+          <%= f.text_field :deliveryInformation_city,
+              value: @checkout.deliveryInformation["city"], class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :deliveryInformation_street, "Street" %>
+          <%= f.text_field :deliveryInformation_street,
+              value: @checkout.deliveryInformation["street"], class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :deliveryInformation_postalCode, "Postal Code" %>
+          <%= f.text_field :deliveryInformation_postalCode,
+              value: @checkout.deliveryInformation["postalCode"], class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="checkout-summary">
+        <h3>Order Summary</h3>
+        <p><strong>Cart Total:</strong> KSh <%= @checkout.cartTotal %></p>
+        <p><strong>Delivery Fee:</strong> KSh 300</p>
+        <p><strong>Total:</strong> KSh <%= @checkout.cartTotal + 300 %></p>
+      </div>
+
+      <div class="form-actions">
+        <%= f.submit "Place Order", class: "btn-submit" %>
+      </div>
+
+    <% end %>
+  </div>
+</div>
+
+<!-- Confirmation Popup -->
+<div id="order-popup" class="popup-overlay hidden">
+  <div class="popup-card">
+    <h3 id="popup-title"></h3>
+    <p id="popup-message"></p>
+    <%= link_to "Back to Products", view_products_path, class: "btn-submit" %>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("turbo:load", () => {
+    const form = document.getElementById("checkout-form");
+    const popup = document.getElementById("order-popup");
+    const popupTitle = document.getElementById("popup-title");
+    const popupMessage = document.getElementById("popup-message");
+
+    if (form) {
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+        const response = await fetch("<%= checkout_path %>", {
+          method: "POST",
+          headers: { "Accept": "application/json" },
+          body: formData
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          popupTitle.textContent = `Order #${data.id} Received!`;
+          popupMessage.textContent = `Your order will be fulfilled by ${data.deliveryDate}.`;
+          popup.classList.remove("hidden");
+        } else {
+          alert("Something went wrong. Please try again.");
+        }
+      });
+    }
+  });
+</script>
+
+<style>
+  .checkout-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+  }
+
+  .checkout-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    padding: 30px;
+    width: 60%;
+  }
+
+  .checkout-section {
+    margin-bottom: 25px;
+  }
+
+  .checkout-section h3 {
+    border-bottom: 2px solid #5a00cc;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    color: #5a00cc;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  .form-control {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+
+  .checkout-summary {
+    margin-top: 20px;
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+  }
+
+  .form-actions {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .btn-submit {
+    background-color: #5a00cc;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .btn-submit:hover {
+    background-color: #4700a3;
+  }
+
+  .popup-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .popup-card {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    width: 400px;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  }
+
+  .popup-card h3 {
+    color: #5a00cc;
+  }
+
+  .hidden {
+    display: none;
+  }
+</style>
