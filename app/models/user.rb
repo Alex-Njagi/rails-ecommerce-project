@@ -19,8 +19,13 @@ class User
 
   #Invoke normalisation function data before saving
   before_save :downcase_email
+  after_create :create_empty_cart
 
   private
+
+  def create_empty_cart
+    Cart.create(user_id: self.id, cartItems: [], cartTotal: 0)
+  end
 
   def downcase_email
     self.email = email.downcase if email.present? # Ensure emails are saved in lowercase

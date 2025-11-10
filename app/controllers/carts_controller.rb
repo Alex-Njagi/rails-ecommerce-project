@@ -33,6 +33,7 @@ class CartsController < ApplicationController
     else
       cart.cartItems << {
         "productID" => product_id,
+        "productName" => product.productName,
         "selectedQuantity" => quantity,
         "productTotal" => product.productPrice * quantity
       }
