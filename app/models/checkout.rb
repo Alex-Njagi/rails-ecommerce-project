@@ -5,6 +5,7 @@ class Checkout
 
   field :user_id, type: BSON::ObjectId
   field :cart_id, type: BSON::ObjectId
+  field :cartItems, type: Array, default: []
   field :cartTotal, type: Float
   field :deliveryFees, type: Float, default: 300.0
   field :totalFees, type: Float

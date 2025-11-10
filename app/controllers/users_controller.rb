@@ -24,7 +24,7 @@ skip_before_action :verify_authenticity_token
             # render json: @user, status: :created
             redirect_to login_path, notice: "Account created successfully!"
         else
-            render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
+            redirect_to signup_path, alert: "Invalid credentials. Please try again"
         end
     end
 
@@ -39,8 +39,7 @@ skip_before_action :verify_authenticity_token
             # redirect_to root_path, notice: "Logged in!"
             redirect_to view_products_path, notice: "Logged in!"
         else
-            flash[:alert] = "Invalid credentials"
-            render :login
+            redirect_to login_path, alert: "Invalid credentials. Please try again" unless session[:user_id]
         end
     end
 
@@ -48,8 +47,6 @@ skip_before_action :verify_authenticity_token
         session[:user_id] = nil
         redirect_to login_path, notice: "Logged out successfully!"
     end
-
-
 
     # PATCH/PUT /users/:id
     def update
