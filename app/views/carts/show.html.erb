@@ -21,6 +21,7 @@
 
   <div class="cart-summary">
     <h2>Total: KSh <%= @cart.cartTotal %></h2>
+    <%= link_to "Proceed to Checkout", checkout_path, style: "margin-right:10px;" %>
   </div>
 <% else %>
   <p>Your cart is empty.</p>
