@@ -1,52 +1,96 @@
-<h1>Sign Up</h1>
+<h1 style="
+  text-align:center;
+  color:#1a73e8;
+  margin-top:25px;
+  font-family:Arial, sans-serif;
+">
+Sign Up
+</h1>
+
+<div style="
+  width:420px;
+  margin:25px auto;
+  background:white;
+  padding:25px 30px;
+  border-radius:10px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+  font-family:Arial, sans-serif;
+">
 
 <%= form_with model: @user, url: signup_path, method: :post, local: true do |form| %>
-  <p>
-    <%= form.label :firstName, "First Name", required: true, title: "Please enter your first name" %><br>
-    <%= form.text_field :firstName %>
+
+    <% input_style = "width:100%; padding:10px; border:1px solid #ccc; border-radius:6px; margin-top:5px;" %>
+
+  <p style="margin-bottom:18px;">
+    <%= form.label :firstName, "First Name", style:"font-weight:bold", required: true, title: "Please enter your first name" %><br>
+    <%= form.text_field :firstName, style: input_style %>
   </p>
 
-  <p>
-    <%= form.label :lastName, "Last Name", required: true, title: "Please enter your last name" %><br>
-    <%= form.text_field :lastName %>
+  <p style="margin-bottom:18px;">
+    <%= form.label :lastName, "Last Name", style:"font-weight:bold", required: true, title: "Please enter your last name" %><br>
+    <%= form.text_field :lastName, style: input_style %>
   </p>
 
-  <p>
-    <%= form.label :email, "Email", required: true, title: "Please enter a valid email address" %><br>
-    <%= form.email_field :email %>
+  <p style="margin-bottom:18px;">
+    <%= form.label :email, "Email", style:"font-weight:bold", required: true, title: "Please enter a valid email address" %><br>
+    <%= form.email_field :email, style: input_style  %>
   </p>
 
-  <p>
-    <%= form.label :password, "Password", required: true, title: "Please enter a valid password" %><br>
-    <%= form.password_field :password %>
+  <p style="margin-bottom:18px;">
+    <%= form.label :password, "Password", style:"font-weight:bold", required: true, title: "Please enter a valid password" %><br>
+    <%= form.password_field :password, style: input_style %>
   </p>
 
-  <p>
-    <%= form.label :phoneNumber, "Phone Number", required: true, title: "Please enter a phone number" %><br>
-    <%= form.telephone_field :phoneNumber %>
+  <p style="margin-bottom:18px;">
+    <%= form.label :phoneNumber, "Phone Number", style:"font-weight:bold", required: true, title: "Please enter a phone number" %><br>
+    <%= form.telephone_field :phoneNumber, style: input_style %>
   </p>
 
-  <fieldset>
-    <legend>Address</legend>
-    <p>
-      <%= label_tag "user[address][county]", "County", required: true %><br>
-      <%= text_field_tag "user[address][county]" %>
+  <fieldset style="
+      border:1px solid #ddd;
+      border-radius:8px;
+      padding:15px;
+      margin-top:20px;
+      margin-bottom:20px;
+    ">
+    <legend style="
+        font-weight:bold;
+        color:#1a73e8;
+        padding:0 8px;
+        font-size:16px;
+      ">
+      Address
+      </legend>
+    <p style="margin-bottom:15px;">
+      <%= label_tag "user[address][county]", "County", style:"font-weight:bold",required: true %><br>
+      <%= text_field_tag "user[address][county]", nil, style: input_style %>
     </p>
-    <p>
-      <%= label_tag "user[address][city]", "City", required: true %><br>
-      <%= text_field_tag "user[address][city]" %>
+    <p style="margin-bottom:15px;">
+      <%= label_tag "user[address][city]", "City",  style:"font-weight:bold", required: true %><br>
+      <%= text_field_tag "user[address][city]", nil, style: input_style  %>
     </p>
-    <p>
-      <%= label_tag "user[address][street]", "Street", required: true %><br>
-      <%= text_field_tag "user[address][street]" %>
+    <p style="margin-bottom:15px;">
+      <%= label_tag "user[address][street]", "Street", style:"font-weight:bold", required: true %><br>
+      <%= text_field_tag "user[address][street]", nil, style: input_style  %>
     </p>
-    <p>
-      <%= label_tag "user[address][postalCode]", "Postal Code", required: true %><br>
-      <%= text_field_tag "user[address][postalCode]" %>
+    <p style="margin-bottom:15px;">
+      <%= label_tag "user[address][postalCode]", "Postal Code",  style:"font-weight:bold", required: true %><br>
+      <%= text_field_tag "user[address][postalCode]", nil, style: input_style  %>
     </p>
   </fieldset>
 
-  <p>
-    <%= form.submit "Sign Up" %>
+  <p style="text-align:center; margin-top:20px;">
+    <%= form.submit "Sign Up", style:"
+        background:#1a73e8;
+        color:white;
+        padding:10px 20px;
+        border:none;
+        border-radius:6px;
+        cursor:pointer;
+        font-size:16px;
+        font-weight:bold;
+        width:100%;
+        " %>
   </p>
 <% end %>
+</div>

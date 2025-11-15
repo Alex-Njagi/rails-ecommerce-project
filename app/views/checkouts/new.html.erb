@@ -103,18 +103,27 @@
 </script>
 
 <style>
+h1 {
+    margin-bottom: 25px;
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+  }
   .checkout-container {
     display: flex;
     justify-content: center;
     margin-top: 30px;
+    padding: 20px 0;
   }
 
   .checkout-card {
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.10);
     padding: 30px;
     width: 60%;
+    max-width: 700px;
+    box-sizing: border-box;
   }
 
   .checkout-section {
@@ -122,10 +131,12 @@
   }
 
   .checkout-section h3 {
-    border-bottom: 2px solid #5a00cc;
+    border-bottom: none;
     padding-bottom: 5px;
     margin-bottom: 15px;
-    color: #5a00cc;
+    color: #333;
+    font-size: 22px;
+    font-weight: bold;
   }
 
   .form-group {
@@ -136,13 +147,16 @@
     display: block;
     font-weight: bold;
     margin-bottom: 5px;
+    font-size: 15px;
   }
 
   .form-control {
     width: 100%;
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #d1d5db;
+    box-sizing: border-box;
+    font-size: 14px;
   }
 
   .checkout-summary {
@@ -150,25 +164,29 @@
     background: #f9f9f9;
     padding: 15px;
     border-radius: 8px;
+    border: 1px solid #eee;
   }
 
   .form-actions {
-    text-align: center;
-    margin-top: 20px;
+    text-align: right;
+    margin-top: 30px;
   }
 
   .btn-submit {
-    background-color: #5a00cc;
-    color: #fff;
+    background-color: #2980b9;
+    color: white;
     border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
+    padding: 10px 18px;
+    border-radius: 6px;
     cursor: pointer;
     text-decoration: none;
+    font-size:16px;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
   }
 
   .btn-submit:hover {
-    background-color: #4700a3;
+    background-color: #2471a3;
   }
 
   .popup-overlay {
@@ -178,19 +196,30 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1000;
   }
 
   .popup-card {
     background: #fff;
-    padding: 30px;
-    border-radius: 12px;
-    width: 400px;
+    padding: 28px;
+    border-radius: 14px;
+    width: 420px;
+    max-width:92%;
     text-align: center;
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    box-shadow: 0 6px 24px rgba(0,0,0,0.18);
   }
 
   .popup-card h3 {
-    color: #5a00cc;
+    color: #2980b9;
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+
+  .popup-card p {
+    font-size: 15px;
+    margin-bottom: 20px;
+    line-height: 1.4;
+    color: #444;
   }
 
   .hidden {

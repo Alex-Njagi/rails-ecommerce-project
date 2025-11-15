@@ -20,31 +20,67 @@
 </div>
 
 <style>
+h1 {
+    margin-bottom: 25px;
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+  }
   .checkout-container {
     display: flex;
     justify-content: center;
     margin-top: 30px;
+    padding: 20px 0;
   }
 
   .checkout-card {
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    background: #ffffff;
+    border-radius: 14px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.10);
     padding: 30px;
     width: 60%;
-    text-align: center;
+    max-width: 700px;
+    text-align: left;
+    box-sizing:  border-box;
+  }
+  .checkout-card p{
+    font-size: 16px;
+    margin-bottom: 12px;
+    line-height: 1.5;
+    color: #333;
+  }
+
+  .checkout-card h3{
+    margin-top:25px;
+    margin-bottom:10px;
+    color: #333;
+    font-size: 22px;
+    font-weight: bold;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+  }
+
+  .form-actions{
+    text-align:center;
+    margin-top: 30px;
   }
 
   .btn-submit {
-    background-color: #5a00cc;
-    color: #fff;
+    background-color: #2980b9;
+    color: #white;
     border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
+    padding: 10px 18px;
+    border-radius: 6px;
     cursor: pointer;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    display: inline-block;
+    transition: background-color 0.2 ease;
   }
 
   .btn-submit:hover {
-    background-color: #4700a3;
+    background-color: #2471a3;
   }
 </style>

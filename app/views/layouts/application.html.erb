@@ -20,35 +20,82 @@
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
+    <%= javascript_importmap_tags %>  
   </head>
 
-  <body>
-    <nav style="background:#eee; padding:10px;">
+  <body style="margin:0; font-family: Arial, sans-serif; background:#f9f9f9;">
+    <nav style="
+      background:#1a73e8;
+      padding:12px 20px;
+      display:flex;
+      align-items:center;
+      gap:15px;
+      color:white;
+      box-shadow:0 2px 5px rgba(0,0,0,0.1);
+    ">
       <% if session[:user_id] %>
-        <span>Welcome, <%= User.find(session[:user_id]).firstName %>!</span>
+        <span style="font-weight:bold;">Welcome, <%= User.find(session[:user_id]).firstName %>!</span>
 
         <% if current_page?(cart_path) %>
-          <%= link_to "Return to Products", view_products_path, style: "margin-left:10px;" %>
+          <%= link_to "Return to Products", view_products_path, style: "margin-left:10px; color:white;
+            text-decoration:none;
+            padding:6px 12px;
+            border-radius:5px;
+            transition:0.2s;" %>
         <% else %>
-          <%= link_to "View Cart", cart_path, style: "margin-left:10px;" %>
+          <%= link_to "View Cart", cart_path, style: "margin-left:10px; color:white;
+            text-decoration:none;
+            padding:6px 12px;
+            border-radius:5px;
+            transition:0.2s;
+            " %>
         <% end %>
 
-        <%= button_to "Logout", logout_path, method: :delete, style: "margin-left:10px;" %>
+        <%= button_to "Logout", logout_path, method: :delete, style: "margin-left:10px; background:#ff5b5b;
+          color:white;
+          border:none;
+          padding:6px 12px;
+          border-radius:5px;
+          cursor:pointer;
+          font-weight:500; 
+          " %>
       <% else %>
-        <%= link_to "Login", login_path, style: "margin-right:10px;" %>
-        <%= link_to "Sign Up", signup_path %>
+        <%= link_to "Login", login_path, style: "margin-right:10px; color:white;
+          text-decoration:none;
+          font-weight:500;
+          padding:6px 12px;
+          border-radius:5px;
+          " %>
+        <%= link_to "Sign Up", signup_path, style: "
+          color:white;
+          text-decoration:none;
+          font-weight:500;
+          padding:6px 12px;
+          border-radius:5px;
+          " %>
       <% end %>
     </nav>
 
     <% if notice %>
-      <p style="color: green;"><%= notice %></p>
+      <p style="background:#d4f7d4;
+        color:#276727;
+        padding:12px;
+        margin:15px 20px;
+        border-radius:6px;
+        font-weight:500;
+        "><%= notice %></p>
     <% elsif alert %>
-      <p style="color: red;"><%= alert %></p>
+      <p style=" background:#ffd5d5;
+        color:#8a1f1f;
+        padding:12px;
+        margin:15px 20px;
+        border-radius:6px;
+        font-weight:500;
+        "><%= alert %></p>
     <% end %>
     <%= yield %>
   </body> 
 
-  <hr>
+  </hr>
 
 </html>
