@@ -1,17 +1,47 @@
-<h1>Login</h1>
+<h1 style="
+  text-align:center;
+  color:#1a73e8;
+  margin-top:25px;
+  font-family:Arial, sans-serif;
+">
+Login
+</h1>
+
+<div style="
+  width:380px;
+  margin:25px auto;
+  background:white;
+  padding:25px 30px;
+  border-radius:10px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+  font-family:Arial, sans-serif;
+">
 
 <%= form_with url: login_path, local: true do |f| %>
-  <div>
-    <%= label_tag :email %><br>
-    <%= email_field_tag :email %>
+  <% input_style = "width:100%; padding:10px; border:1px solid #ccc; border-radius:6px; margin-top:5px;" %>
+
+  <div style="margin-bottom:18px;">
+    <%= label_tag :email, "Email", style:"font-weight:bold;" %><br>
+    <%= email_field_tag :email , nil, style: input_style %>
   </div>
 
-  <div>
-    <%= label_tag :password %><br>
-    <%= password_field_tag :password %>
+  <div style="margin-bottom:18px;">
+    <%= label_tag :password, "Password", style:"font-weight:bold;" %><br>
+    <%= password_field_tag :password, nil, style: input_style %>
   </div>
 
-  <div>
-    <%= submit_tag "Login" %>
+  <div style="text-align:center; margin-top:20px;">
+    <%= submit_tag "Login", style:"
+        background:#1a73e8;
+        color:white;
+        padding:10px 20px;
+        border:none;
+        border-radius:6px;
+        cursor:pointer;
+        font-size:16px;
+        font-weight:bold;
+        width:100%;
+        " %>
   </div>
 <% end %>
+</div >
