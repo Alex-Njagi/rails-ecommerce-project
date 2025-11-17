@@ -32,6 +32,8 @@
       gap:15px;
       color:white;
       box-shadow:0 2px 5px rgba(0,0,0,0.1);
+      background: #020024;
+      background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
     ">
       <% if session[:user_id] %>
         <span style="font-weight:bold;">Welcome, <%= User.find(session[:user_id]).firstName %>!</span>
@@ -67,6 +69,13 @@
           border-radius:5px;
           " %>
         <%= link_to "Sign Up", signup_path, style: "
+          color:white;
+          text-decoration:none;
+          font-weight:500;
+          padding:6px 12px;
+          border-radius:5px;
+          " %>
+        <%= link_to "Home", root_path, style: "
           color:white;
           text-decoration:none;
           font-weight:500;
